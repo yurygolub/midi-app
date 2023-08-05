@@ -3,8 +3,83 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="clr-namespace:MidiApp.Converters"
         mc:Ignorable="d"
         DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}"
         Title="MidiApp" Height="450" Width="800">
+    <Window.Resources>
+        <c:DeviceToNameConverter x:Key="DeviceToNameConverter"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                BorderThickness="1"
+                BorderBrush="Gray">
+            <ScrollViewer >
+                <TextBlock Text="{Binding OutputText}"
+                       Padding="10"/>
+            </ScrollViewer>
+        </Border>
+        
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Hidden"
+                      HorizontalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding StartCommand}"
+                        IsEnabled="{Binding StartButtonEnabled}"
+                        Padding="5" Margin="10">
+                    Start
+                </Button>
+
+                <Button Command="{Binding StopCommand}"
+                        IsEnabled="{Binding StopButtonEnabled}"
+                        Padding="5" Margin="10">
+                    Stop
+                </Button>
+
+                <Button Command="{Binding ClearCommand}"
+                        Padding="5" Margin="10">
+                    Clear
+                </Button>
+
+                <TextBlock VerticalAlignment="Center"
+                           Padding="5" Margin="10">
+                    Midi In
+                </TextBlock>
+                
+                <ComboBox SelectedValue="{Binding SelectedInDevice}"
+                          ItemsSource ="{Binding InDevices}"
+                          IsEnabled="{Binding StartButtonEnabled}"
+                          Padding="5" Margin="0, 10, 10, 10">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource DeviceToNameConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <TextBlock VerticalAlignment="Center"
+                           Padding="5" Margin="5">
+                    Midi Out
+                </TextBlock>
+                
+                <ComboBox SelectedValue="{Binding SelectedOutDevice}"
+                          ItemsSource ="{Binding OutDevices}"
+                          IsEnabled="{Binding StartButtonEnabled}"
+                          Padding="5" Margin="0, 10, 10, 10">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource DeviceToNameConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Window>

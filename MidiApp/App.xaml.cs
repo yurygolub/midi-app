@@ -10,11 +10,11 @@ namespace MidiApp
     /// </summary>
     public partial class App : Application
     {
+        public static MainWindowViewModel MainWindowViewModel { get; } = new (new MainWindowModel());
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            new MainWindow(
-                new MainWindowViewModel(
-                    new MainWindowModel())).Show();
+            new MainWindow(MainWindowViewModel).Show();
 
             base.OnStartup(e);
         }
