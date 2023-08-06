@@ -14,6 +14,8 @@ namespace MidiApp.ViewModels
     {
         private readonly MainWindowModel model;
 
+        private ICommand consoleVisibilityCommand;
+
         private ICommand startCommand;
         private ICommand stopCommand;
         private ICommand clearCommand;
@@ -45,22 +47,30 @@ namespace MidiApp.ViewModels
 
         public string OutputText { get; set; }
 
+        public ICommand ConsoleVisibilityCommand =>
+            this.consoleVisibilityCommand ??= new ActionCommand(MainWindowModel.SwitchConsoleVisibility);
+
         public ICommand StartCommand =>
             this.startCommand ??= new ActionCommand(() =>
             {
-                this.StartButtonEnabled = false;
-                this.StopButtonEnabled = true;
+                this.ToggleControls();
 
-                this.model.StartListening(this.SelectedOutDevice.Index);
+                try
+                {
+                    this.model.StartListening(this.SelectedInDevice.Index);
+                }
+                catch
+                {
+                    this.ToggleControls();
+                    throw;
+                }
             });
 
         public ICommand StopCommand =>
             this.stopCommand ??= new ActionCommand(() =>
             {
                 this.model.StopListening();
-
-                this.StartButtonEnabled = true;
-                this.StopButtonEnabled = false;
+                this.ToggleControls();
             });
 
         public ICommand ClearCommand =>
@@ -68,5 +78,11 @@ namespace MidiApp.ViewModels
             {
                 this.OutputText = string.Empty;
             });
+
+        private void ToggleControls()
+        {
+            this.StartButtonEnabled = !this.StartButtonEnabled;
+            this.StopButtonEnabled = !this.StopButtonEnabled;
+        }
     }
 }

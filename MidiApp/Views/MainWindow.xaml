@@ -14,11 +14,20 @@
     
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0"
+        <Menu Grid.Row="0">
+            <MenuItem Header="View"
+                      Padding="2, 1" Margin="2, 1">
+                <MenuItem Header="Switch console visibility"
+                          Command="{Binding ConsoleVisibilityCommand}"/>
+            </MenuItem>
+        </Menu>
+
+        <Border Grid.Row="1"
                 BorderThickness="1"
                 BorderBrush="Gray">
             <ScrollViewer >
@@ -27,7 +36,7 @@
             </ScrollViewer>
         </Border>
         
-        <ScrollViewer Grid.Row="1"
+        <ScrollViewer Grid.Row="2"
                       VerticalScrollBarVisibility="Hidden"
                       HorizontalScrollBarVisibility="Auto">
             <StackPanel Orientation="Horizontal">

@@ -1,7 +1,9 @@
 ﻿using System.Windows;
-using MidiApp.Models;
-using MidiApp.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using MidiApp.Extensions;
 using MidiApp.Views;
+using NLog.Extensions.Logging;
 
 namespace MidiApp
 {
@@ -10,13 +12,39 @@ namespace MidiApp
     /// </summary>
     public partial class App : Application
     {
-        public static MainWindowViewModel MainWindowViewModel { get; } = new (new MainWindowModel());
+        private readonly Startup startup = new ();
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            new MainWindow(MainWindowViewModel).Show();
+            ConsoleManager.OpenConsole();
+            ConsoleManager.HideConsole();
+
+            new ServiceCollection()
+                .AddSingleton<GlobalExceptionHandler>()
+                .AddLogging(builder =>
+                {
+                    builder
+                        .AddConsole()
+                        .AddNLog(this.startup.Configuration);
+                })
+                .BuildServiceProvider()
+                .GetRequiredService<GlobalExceptionHandler>()
+                .SetupExceptionHandling();
+
+            this.startup
+                .ConfigureServices(new ServiceCollection())
+                .BuildServiceProvider()
+                .GetRequiredService<MainWindow>()
+                .Show();
 
             base.OnStartup(e);
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            ConsoleManager.CloseConsole();
+
+            base.OnExit(e);
         }
     }
 }
