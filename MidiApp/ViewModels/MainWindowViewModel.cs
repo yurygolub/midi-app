@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using Microsoft.Win32;
 using MidiApp.Commands;
 using MidiApp.Models;
 
@@ -19,6 +20,12 @@ namespace MidiApp.ViewModels
         private ICommand startCommand;
         private ICommand stopCommand;
         private ICommand clearCommand;
+
+        private ICommand startPlaybackCommand;
+
+        private ICommand openFileCommand;
+
+        private string filePath;
 
         public MainWindowViewModel(MainWindowModel model)
         {
@@ -45,7 +52,9 @@ namespace MidiApp.ViewModels
 
         public Device SelectedOutDevice { get; set; }
 
-        public string OutputText { get; set; }
+        public string MidiInOutput { get; set; }
+
+        public string MidiOutOutput { get; set; }
 
         public ICommand ConsoleVisibilityCommand =>
             this.consoleVisibilityCommand ??= new ActionCommand(MainWindowModel.SwitchConsoleVisibility);
@@ -76,7 +85,38 @@ namespace MidiApp.ViewModels
         public ICommand ClearCommand =>
             this.clearCommand ??= new ActionCommand(() =>
             {
-                this.OutputText = string.Empty;
+                this.MidiInOutput = string.Empty;
+                this.MidiOutOutput = string.Empty;
+            });
+
+        public ICommand StartPlaybackCommand =>
+            this.startPlaybackCommand ??= new ActionCommand(async () =>
+            {
+                this.ToggleControls();
+
+                try
+                {
+                    await this.model.StartPlayingAsync(this.SelectedOutDevice.Index, this.filePath);
+                }
+                finally
+                {
+                    this.ToggleControls();
+                }
+            });
+
+        public ICommand OpenFileCommand =>
+            this.openFileCommand ??= new ActionCommand(() =>
+            {
+                var openFileDialog = new OpenFileDialog
+                {
+                    Filter = "Midi files (*.mid)|*.mid|All files (*.*)|*.*",
+                    RestoreDirectory = true,
+                };
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    this.filePath = openFileDialog.FileName;
+                }
             });
 
         private void ToggleControls()

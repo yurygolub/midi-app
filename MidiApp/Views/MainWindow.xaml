@@ -16,7 +16,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0">
@@ -27,68 +26,127 @@
             </MenuItem>
         </Menu>
 
-        <Border Grid.Row="1"
-                BorderThickness="1"
-                BorderBrush="Gray">
-            <ScrollViewer >
-                <TextBlock Text="{Binding OutputText}"
-                       Padding="10"/>
-            </ScrollViewer>
-        </Border>
-        
-        <ScrollViewer Grid.Row="2"
-                      VerticalScrollBarVisibility="Hidden"
-                      HorizontalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding StartCommand}"
-                        IsEnabled="{Binding StartButtonEnabled}"
-                        Padding="5" Margin="10">
-                    Start
-                </Button>
-
-                <Button Command="{Binding StopCommand}"
-                        IsEnabled="{Binding StopButtonEnabled}"
-                        Padding="5" Margin="10">
-                    Stop
-                </Button>
-
-                <Button Command="{Binding ClearCommand}"
-                        Padding="5" Margin="10">
-                    Clear
-                </Button>
-
-                <TextBlock VerticalAlignment="Center"
-                           Padding="5" Margin="10">
-                    Midi In
-                </TextBlock>
+        <TabControl Grid.Row="1">
+            <TabItem>
+                <TabItem.Header>
+                    Midi in
+                </TabItem.Header>
                 
-                <ComboBox SelectedValue="{Binding SelectedInDevice}"
-                          ItemsSource ="{Binding InDevices}"
-                          IsEnabled="{Binding StartButtonEnabled}"
-                          Padding="5" Margin="0, 10, 10, 10">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Converter={StaticResource DeviceToNameConverter}}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
 
-                <TextBlock VerticalAlignment="Center"
-                           Padding="5" Margin="5">
-                    Midi Out
-                </TextBlock>
-                
-                <ComboBox SelectedValue="{Binding SelectedOutDevice}"
-                          ItemsSource ="{Binding OutDevices}"
-                          IsEnabled="{Binding StartButtonEnabled}"
-                          Padding="5" Margin="0, 10, 10, 10">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Converter={StaticResource DeviceToNameConverter}}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </StackPanel>
-        </ScrollViewer>
+                    <Border Grid.Row="0"
+                            BorderThickness="1"
+                            BorderBrush="Gray">
+                        <ScrollViewer >
+                            <TextBlock Text="{Binding MidiInOutput}"
+                                       Padding="10"/>
+                        </ScrollViewer>
+                    </Border>
+
+                    <ScrollViewer Grid.Row="1"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Auto">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Command="{Binding StartCommand}"
+                                    IsEnabled="{Binding StartButtonEnabled}"
+                                    Padding="5" Margin="10">
+                                Start
+                            </Button>
+
+                            <Button Command="{Binding StopCommand}"
+                                    IsEnabled="{Binding StopButtonEnabled}"
+                                    Padding="5" Margin="10">
+                                Stop
+                            </Button>
+
+                            <Button Command="{Binding ClearCommand}"
+                                    Padding="5" Margin="10">
+                                Clear
+                            </Button>
+
+                            <TextBlock VerticalAlignment="Center"
+                                       Padding="5" Margin="10">
+                                Midi In
+                            </TextBlock>
+
+                            <ComboBox SelectedValue="{Binding SelectedInDevice}"
+                                      ItemsSource ="{Binding InDevices}"
+                                      IsEnabled="{Binding StartButtonEnabled}"
+                                      Padding="5" Margin="0, 10, 10, 10">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource DeviceToNameConverter}}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    Midi out
+                </TabItem.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+                            BorderThickness="1"
+                            BorderBrush="Gray">
+                        <ScrollViewer >
+                            <TextBlock Text="{Binding MidiOutOutput}"
+                                       Padding="10"/>
+                        </ScrollViewer>
+                    </Border>
+
+                    <ScrollViewer Grid.Row="1"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Auto">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Command="{Binding StartPlaybackCommand}"
+                                    IsEnabled="{Binding StartButtonEnabled}"
+                                    Padding="5" Margin="10">
+                                Start
+                            </Button>
+
+                            <Button Command="{Binding ClearCommand}"
+                                    Padding="5" Margin="10">
+                                Clear
+                            </Button>
+
+                            <TextBlock VerticalAlignment="Center"
+                                       Padding="5" Margin="5">
+                                Midi Out
+                            </TextBlock>
+
+                            <ComboBox SelectedValue="{Binding SelectedOutDevice}"
+                                      ItemsSource ="{Binding OutDevices}"
+                                      IsEnabled="{Binding StartButtonEnabled}"
+                                      Padding="5" Margin="0, 10, 10, 10">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource DeviceToNameConverter}}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <Button Command="{Binding OpenFileCommand}"
+                                    Padding="5" Margin="10">
+                                Open file
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
