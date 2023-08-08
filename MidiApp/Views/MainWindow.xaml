@@ -3,12 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:c="clr-namespace:MidiApp.Converters"
         mc:Ignorable="d"
         DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}"
         Title="MidiApp" Height="450" Width="800">
     <Window.Resources>
-        <c:DeviceToNameConverter x:Key="DeviceToNameConverter"/>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
     
@@ -26,127 +24,39 @@
             </MenuItem>
         </Menu>
 
-        <TabControl Grid.Row="1">
-            <TabItem>
-                <TabItem.Header>
-                    Midi in
-                </TabItem.Header>
-                
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
+        <TabControl Grid.Row="1"
+                    ItemsSource="{Binding TabCollection}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Header}"
+                                   TextAlignment="Center"
+                                   Margin="5"
+                                   Padding="5, 0">
+                        </TextBlock>
+                        
+                        <Button Command="{Binding CloseCommand}"
+                                Visibility="{Binding CanBeClosed, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Background="DarkGray"
+                                BorderThickness="0"
+                                FontSize="10"
+                                Width="15"
+                                Height="15">
+                            X
+                        </Button>
+                    </StackPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
 
-                    <Border Grid.Row="0"
-                            BorderThickness="1"
-                            BorderBrush="Gray">
-                        <ScrollViewer >
-                            <TextBlock Text="{Binding MidiInOutput}"
-                                       Padding="10"/>
-                        </ScrollViewer>
-                    </Border>
-
-                    <ScrollViewer Grid.Row="1"
-                                  VerticalScrollBarVisibility="Hidden"
-                                  HorizontalScrollBarVisibility="Auto">
-                        <StackPanel Orientation="Horizontal">
-                            <Button Command="{Binding StartCommand}"
-                                    IsEnabled="{Binding StartButtonEnabled}"
-                                    Padding="5" Margin="10">
-                                Start
-                            </Button>
-
-                            <Button Command="{Binding StopCommand}"
-                                    IsEnabled="{Binding StopButtonEnabled}"
-                                    Padding="5" Margin="10">
-                                Stop
-                            </Button>
-
-                            <Button Command="{Binding ClearCommand}"
-                                    Padding="5" Margin="10">
-                                Clear
-                            </Button>
-
-                            <TextBlock VerticalAlignment="Center"
-                                       Padding="5" Margin="10">
-                                Midi In
-                            </TextBlock>
-
-                            <ComboBox SelectedValue="{Binding SelectedInDevice}"
-                                      ItemsSource ="{Binding InDevices}"
-                                      IsEnabled="{Binding StartButtonEnabled}"
-                                      Padding="5" Margin="0, 10, 10, 10">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Converter={StaticResource DeviceToNameConverter}}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    Midi out
-                </TabItem.Header>
-
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Border Grid.Row="0"
-                            BorderThickness="1"
-                            BorderBrush="Gray">
-                        <ScrollViewer >
-                            <TextBlock Text="{Binding MidiOutOutput}"
-                                       Padding="10"/>
-                        </ScrollViewer>
-                    </Border>
-
-                    <ScrollViewer Grid.Row="1"
-                                  VerticalScrollBarVisibility="Hidden"
-                                  HorizontalScrollBarVisibility="Auto">
-                        <StackPanel Orientation="Horizontal">
-                            <Button Command="{Binding StartPlaybackCommand}"
-                                    IsEnabled="{Binding StartButtonEnabled}"
-                                    Padding="5" Margin="10">
-                                Start
-                            </Button>
-
-                            <Button Command="{Binding ClearCommand}"
-                                    Padding="5" Margin="10">
-                                Clear
-                            </Button>
-
-                            <TextBlock VerticalAlignment="Center"
-                                       Padding="5" Margin="5">
-                                Midi Out
-                            </TextBlock>
-
-                            <ComboBox SelectedValue="{Binding SelectedOutDevice}"
-                                      ItemsSource ="{Binding OutDevices}"
-                                      IsEnabled="{Binding StartButtonEnabled}"
-                                      Padding="5" Margin="0, 10, 10, 10">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Converter={StaticResource DeviceToNameConverter}}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-
-                            <Button Command="{Binding OpenFileCommand}"
-                                    Padding="5" Margin="10">
-                                Open file
-                            </Button>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-            </TabItem>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding Content}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
     </Grid>
 </Window>

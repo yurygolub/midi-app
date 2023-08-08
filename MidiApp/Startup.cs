@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MidiApp.Infrastructure;
 using MidiApp.Models;
 using MidiApp.ViewModels;
 using MidiApp.Views;
@@ -22,6 +23,14 @@ namespace MidiApp
                 .AddSingleton<MainWindow>()
                 .AddSingleton<MainWindowViewModel>()
                 .AddSingleton<MainWindowModel>()
+                .AddSingleton<MidiInView>()
+                .AddSingleton<MidiInViewModel>()
+                .AddSingleton<MidiInModel>()
+                .AddSingleton<MidiOutView>()
+                .AddSingleton<MidiOutViewModel>()
+                .AddSingleton<MidiOutModel>()
+                .AddSingleton<Tab, MidiInTab>()
+                .AddSingleton<Tab, MidiOutTab>()
                 .AddLogging(builder =>
                 {
                     builder
