@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Input;
@@ -43,6 +44,8 @@ namespace MidiApp.ViewModels
         public Device SelectedDevice { get; set; }
 
         public string Output { get; set; }
+
+        public string FileName { get; set; }
 
         public ICommand ClearCommand =>
             this.clearCommand ??= new ActionCommand(() =>
@@ -101,6 +104,7 @@ namespace MidiApp.ViewModels
                 if (openFileDialog.ShowDialog() == true)
                 {
                     this.filePath = openFileDialog.FileName;
+                    this.FileName = Path.GetFileName(openFileDialog.FileName);
                 }
             });
 

@@ -68,6 +68,12 @@
                         Padding="5" Margin="10">
                     Open file
                 </Button>
+
+                <TextBlock Text="{Binding FileName}"
+                           VerticalAlignment="Center"
+                           Padding="5" Margin="5">
+                    
+                </TextBlock>
             </StackPanel>
         </ScrollViewer>
     </Grid>
