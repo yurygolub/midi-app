@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using MidiApp.ViewModels;
@@ -34,7 +35,7 @@ namespace MidiApp.Models
             return devices;
         }
 
-        public async Task StartPlayingAsync(int deviceIndex, string filePath)
+        public async Task StartPlayingAsync(int deviceIndex, string filePath, CancellationToken token)
         {
             this.midiOutViewModel ??= this.serviceProvider.GetRequiredService<MidiOutViewModel>();
 
@@ -43,7 +44,7 @@ namespace MidiApp.Models
 
             TimeSignatureEvent timeSignature = midiFile.Events[0].OfType<TimeSignatureEvent>().FirstOrDefault();
 
-            var midiOut = new MidiOut(deviceIndex);
+            using var midiOut = new MidiOut(deviceIndex);
             int absoluteTime = 0;
 
             for (int i = 0; i < midiFile.Tracks; i++)
@@ -57,15 +58,13 @@ namespace MidiApp.Models
 
                     if (midiEvent.AbsoluteTime > absoluteTime)
                     {
-                        await Task.Delay((int)midiEvent.AbsoluteTime - absoluteTime);
+                        await Task.Delay((int)midiEvent.AbsoluteTime - absoluteTime, token);
                         absoluteTime = (int)midiEvent.AbsoluteTime;
                     }
 
                     midiOut.Send(midiEvent.GetAsShortMessage());
                 }
             }
-
-            midiOut.Dispose();
         }
 
         private static string ToMeasuresBeatsTicks(long eventTime, int ticksPerQuarterNote, TimeSignatureEvent timeSignature)

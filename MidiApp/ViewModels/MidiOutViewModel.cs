@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Input;
 using Microsoft.Win32;
 using MidiApp.Commands;
@@ -18,8 +19,10 @@ namespace MidiApp.ViewModels
 
         private ICommand clearCommand;
         private ICommand startPlaybackCommand;
+        private ICommand stopPlaybackCommand;
         private ICommand openFileCommand;
 
+        private CancellationTokenSource cts;
         private string filePath;
 
         public MidiOutViewModel(MidiOutModel midiOutModel)
@@ -32,6 +35,8 @@ namespace MidiApp.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         public bool StartButtonEnabled { get; set; } = true;
+
+        public bool StopButtonEnabled { get; set; }
 
         public IEnumerable<Device> Devices { get; set; }
 
@@ -51,9 +56,31 @@ namespace MidiApp.ViewModels
                 this.ToggleControls();
                 this.CheckDevices();
 
+                this.cts = new CancellationTokenSource();
+
                 try
                 {
-                    await this.model.StartPlayingAsync(this.SelectedDevice.Index, this.filePath);
+                    await this.model.StartPlayingAsync(this.SelectedDevice.Index, this.filePath, this.cts.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                }
+                finally
+                {
+                    this.ToggleControls();
+                    this.CheckDevices();
+                }
+            });
+
+        public ICommand StopPlaybackCommand =>
+            this.stopPlaybackCommand ??= new ActionCommand(() =>
+            {
+                this.ToggleControls();
+                this.CheckDevices();
+
+                try
+                {
+                    this.cts.Cancel();
                 }
                 finally
                 {
@@ -93,6 +120,7 @@ namespace MidiApp.ViewModels
         private void ToggleControls()
         {
             this.StartButtonEnabled = !this.StartButtonEnabled;
+            this.StopButtonEnabled = !this.StopButtonEnabled;
         }
     }
 }

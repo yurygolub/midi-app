@@ -34,7 +34,13 @@
                 <Button Command="{Binding StartPlaybackCommand}"
                         IsEnabled="{Binding StartButtonEnabled}"
                         Padding="5" Margin="10">
-                    Start
+                    Play
+                </Button>
+
+                <Button Command="{Binding StopPlaybackCommand}"
+                        IsEnabled="{Binding StopButtonEnabled}"
+                        Padding="5" Margin="10">
+                    Stop
                 </Button>
 
                 <Button Command="{Binding ClearCommand}"
