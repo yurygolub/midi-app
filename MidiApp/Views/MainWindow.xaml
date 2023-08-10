@@ -22,6 +22,10 @@
                 <MenuItem Header="Switch console visibility"
                           Command="{Binding ConsoleVisibilityCommand}"/>
             </MenuItem>
+
+            <MenuItem Header="About"
+                      Command="{Binding AboutCommand}"
+                      Padding="2, 1" Margin="2, 1"/>
         </Menu>
 
         <TabControl Grid.Row="1"

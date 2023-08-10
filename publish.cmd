@@ -3,7 +3,7 @@
 where /q dotnet
 if %ERRORLEVEL% NEQ 0 goto missingDotnet
 
-dotnet publish MidiApp --configuration Release --output publish -p:DebugType=None -p:DebugSymbols=false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --no-self-contained --os win
+dotnet publish MidiApp --configuration Release --output publish/MidiApp -p:DebugType=None -p:DebugSymbols=false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --no-self-contained --os win
 
 goto exit
 

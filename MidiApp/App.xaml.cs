@@ -31,11 +31,12 @@ namespace MidiApp
                 .GetRequiredService<GlobalExceptionHandler>()
                 .SetupExceptionHandling();
 
-            this.startup
+            this.MainWindow = this.startup
                 .ConfigureServices(new ServiceCollection())
                 .BuildServiceProvider()
-                .GetRequiredService<MainWindow>()
-                .Show();
+                .GetRequiredService<MainWindow>();
+
+            this.MainWindow.Show();
 
             base.OnStartup(e);
         }

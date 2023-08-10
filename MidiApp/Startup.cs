@@ -31,6 +31,8 @@ namespace MidiApp
                 .AddSingleton<MidiOutModel>()
                 .AddSingleton<Tab, MidiInTab>()
                 .AddSingleton<Tab, MidiOutTab>()
+                .AddTransient<AboutView>()
+                .AddSingleton<AboutViewModel>()
                 .AddLogging(builder =>
                 {
                     builder

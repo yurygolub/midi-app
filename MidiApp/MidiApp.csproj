@@ -5,6 +5,9 @@
         <TargetFramework>net7.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
         <CodeAnalysisRuleSet>..\code-analysis.ruleset</CodeAnalysisRuleSet>
+        <Deterministic>false</Deterministic>
+        <AssemblyVersion>0.1.*</AssemblyVersion>
+        <NoWarn>7035</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>

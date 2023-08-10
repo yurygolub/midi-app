@@ -71,9 +71,7 @@
 
                 <TextBlock Text="{Binding FileName}"
                            VerticalAlignment="Center"
-                           Padding="5" Margin="5">
-                    
-                </TextBlock>
+                           Padding="5" Margin="5"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>
