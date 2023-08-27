@@ -25,9 +25,12 @@
             <TextBlock Padding="5" Margin="10">
                 Version:
             </TextBlock>
-            
-            <TextBlock Text="{Binding Version}"
-                       Padding="5" Margin="10"/>
+
+            <TextBox Text="{Binding Version, Mode=OneWay}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     IsReadOnly="True"
+                     Padding="5" Margin="10"/>
         </StackPanel>
         
         <StackPanel Orientation="Horizontal"
@@ -35,9 +38,12 @@
             <TextBlock Padding="5" Margin="10">
                 Build date:
             </TextBlock>
-            
-            <TextBlock Text="{Binding BuildDate}"
-                       Padding="5" Margin="10"/>
+
+            <TextBox Text="{Binding BuildDate, Mode=OneWay}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     IsReadOnly="True"
+                     Padding="5" Margin="10"/>
         </StackPanel>
     </StackPanel>
 </Window>
