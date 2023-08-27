@@ -69,9 +69,7 @@ namespace MidiApp.Models
 
         private static string ToMeasuresBeatsTicks(long eventTime, int ticksPerQuarterNote, TimeSignatureEvent timeSignature)
         {
-            int beatsPerBar = timeSignature == null
-                ? 4
-                : timeSignature.Numerator;
+            int beatsPerBar = timeSignature?.Numerator ?? 4;
 
             int ticksPerBar = timeSignature == null
                 ? ticksPerQuarterNote * 4

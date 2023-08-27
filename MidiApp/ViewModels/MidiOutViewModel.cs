@@ -95,16 +95,16 @@ namespace MidiApp.ViewModels
         public ICommand OpenFileCommand =>
             this.openFileCommand ??= new ActionCommand(() =>
             {
-                var openFileDialog = new OpenFileDialog
+                OpenFileDialog dialog = new OpenFileDialog
                 {
                     Filter = "Midi files (*.mid)|*.mid|All files (*.*)|*.*",
                     RestoreDirectory = true,
                 };
 
-                if (openFileDialog.ShowDialog() == true)
+                if (dialog.ShowDialog() == true)
                 {
-                    this.filePath = openFileDialog.FileName;
-                    this.FileName = Path.GetFileName(openFileDialog.FileName);
+                    this.filePath = dialog.FileName;
+                    this.FileName = Path.GetFileName(dialog.FileName);
                 }
             });
 
