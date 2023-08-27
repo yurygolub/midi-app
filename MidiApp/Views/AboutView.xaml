@@ -5,7 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}"
-        Title="AboutView" Height="200" Width="300">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True"
+        Title="About" Height="200" Width="300">
+    <Window.InputBindings>
+        <KeyBinding Key="Esc"
+                    Command="ApplicationCommands.Close"/>
+    </Window.InputBindings>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        Executed="CloseCommandHandler"/>
+    </Window.CommandBindings>
+
     <StackPanel VerticalAlignment="Center">
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">

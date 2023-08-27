@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using MidiApp.ViewModels;
 
 namespace MidiApp.Views
@@ -16,5 +17,10 @@ namespace MidiApp.Views
         }
 
         public AboutViewModel ViewModel { get; }
+
+        private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
