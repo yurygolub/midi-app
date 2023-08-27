@@ -6,11 +6,11 @@ if %ERRORLEVEL% NEQ 0 goto missingDotnet
 where /q iscc
 if %ERRORLEVEL% NEQ 0 goto missingIscc
 
-set outputPath=publish
+set publishOutputPath=publish
 
-if exist "%outputPath%" rmdir /s /q "%outputPath%"
+if exist "%publishOutputPath%" rmdir /s /q "%publishOutputPath%"
 
-dotnet publish MidiApp --configuration Release --output "%outputPath%" -p:DebugType=None -p:DebugSymbols=false -p:SatelliteResourceLanguages=en --self-contained --os win
+dotnet publish MidiApp --configuration Release --output "%publishOutputPath%" -p:DebugType=None -p:DebugSymbols=false -p:SatelliteResourceLanguages=en --self-contained --os win
 
 echo:
 
