@@ -19,9 +19,9 @@ namespace MidiApp.ViewModels
         private ICommand stopCommand;
         private ICommand clearCommand;
 
-        public MidiInViewModel(MidiInModel midiInModel)
+        public MidiInViewModel(MidiInModel model)
         {
-            this.model = midiInModel ?? throw new ArgumentNullException(nameof(midiInModel));
+            this.model = model ?? throw new ArgumentNullException(nameof(model));
 
             this.CheckDevices();
         }
@@ -73,7 +73,7 @@ namespace MidiApp.ViewModels
 
         private void CheckDevices()
         {
-            var devices = this.model.GetDevices();
+            var devices = MidiInModel.GetDevices();
             if (this.Devices is null || !this.Devices.SequenceEqual(devices, new DeviceComparer()))
             {
                 this.Devices = devices;

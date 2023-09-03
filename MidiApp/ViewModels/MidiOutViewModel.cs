@@ -26,9 +26,9 @@ namespace MidiApp.ViewModels
         private CancellationTokenSource cts;
         private string filePath;
 
-        public MidiOutViewModel(MidiOutModel midiOutModel)
+        public MidiOutViewModel(MidiOutModel model)
         {
-            this.model = midiOutModel ?? throw new ArgumentNullException(nameof(midiOutModel));
+            this.model = model ?? throw new ArgumentNullException(nameof(model));
 
             this.CheckDevices();
         }
@@ -56,6 +56,11 @@ namespace MidiApp.ViewModels
         public ICommand StartPlaybackCommand =>
             this.startPlaybackCommand ??= new ActionCommand(async () =>
             {
+                if (this.filePath is null && !this.OpenFile())
+                {
+                    return;
+                }
+
                 this.ToggleControls();
                 this.CheckDevices();
 
@@ -95,22 +100,30 @@ namespace MidiApp.ViewModels
         public ICommand OpenFileCommand =>
             this.openFileCommand ??= new ActionCommand(() =>
             {
-                OpenFileDialog dialog = new OpenFileDialog
-                {
-                    Filter = "Midi files (*.mid)|*.mid|All files (*.*)|*.*",
-                    RestoreDirectory = true,
-                };
-
-                if (dialog.ShowDialog() == true)
-                {
-                    this.filePath = dialog.FileName;
-                    this.FileName = Path.GetFileName(dialog.FileName);
-                }
+                this.OpenFile();
             });
+
+        private bool OpenFile()
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Midi files (*.mid)|*.mid|All files (*.*)|*.*",
+                RestoreDirectory = true,
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                this.filePath = dialog.FileName;
+                this.FileName = Path.GetFileName(dialog.FileName);
+                return true;
+            }
+
+            return false;
+        }
 
         private void CheckDevices()
         {
-            var devices = this.model.GetDevices();
+            var devices = MidiOutModel.GetDevices();
             if (this.Devices is null || !this.Devices.SequenceEqual(devices, new DeviceComparer()))
             {
                 this.Devices = devices;

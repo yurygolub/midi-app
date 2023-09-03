@@ -17,7 +17,7 @@ namespace MidiApp.Models
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
 
-        public IEnumerable<Device> GetDevices()
+        public static IEnumerable<Device> GetDevices()
         {
             var devices = new List<Device>();
             for (int i = 0; i < MidiIn.NumberOfDevices; i++)
