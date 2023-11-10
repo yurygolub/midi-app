@@ -36,7 +36,7 @@ namespace MidiApp.ViewModels
 
         public Device SelectedDevice { get; set; }
 
-        public string Output { get; set; }
+        public StateModel State => this.model.State;
 
         public ICommand StartCommand =>
             this.startCommand ??= new ActionCommand(() =>
@@ -68,7 +68,7 @@ namespace MidiApp.ViewModels
         public ICommand ClearCommand =>
             this.clearCommand ??= new ActionCommand(() =>
             {
-                this.Output = string.Empty;
+                this.State.Output = string.Empty;
             });
 
         private void CheckDevices()

@@ -43,14 +43,14 @@ namespace MidiApp.ViewModels
 
         public Device SelectedDevice { get; set; }
 
-        public string Output { get; set; }
+        public StateModel State => this.model.State;
 
         public string FileName { get; set; }
 
         public ICommand ClearCommand =>
             this.clearCommand ??= new ActionCommand(() =>
             {
-                this.Output = string.Empty;
+                this.State.Output = string.Empty;
             });
 
         public ICommand StartPlaybackCommand =>

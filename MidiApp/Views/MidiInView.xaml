@@ -23,7 +23,7 @@
                 BorderThickness="1"
                 BorderBrush="Gray">
             <ScrollViewer >
-                <TextBlock Text="{Binding Output}"
+                <TextBlock Text="{Binding State.Output}"
                            Padding="10"/>
             </ScrollViewer>
         </Border>
