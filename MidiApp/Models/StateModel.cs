@@ -1,6 +1,6 @@
-﻿using MidiApp.Infrastructure;
+﻿using MidiApp.Wpf.Infrastructure;
 
-namespace MidiApp.Models;
+namespace MidiApp.Wpf.Models;
 
 public class StateModel : ObservableObject
 {

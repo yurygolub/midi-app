@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NAudio.Midi;
 
-namespace MidiApp.Models;
+namespace MidiApp.Wpf.Models;
 
 public class MidiOutModel
 {

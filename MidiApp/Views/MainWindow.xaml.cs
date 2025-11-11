@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
-using MidiApp.ViewModels;
+using MidiApp.Wpf.ViewModels;
 
-namespace MidiApp.Views;
+namespace MidiApp.Wpf.Views;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml.

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
-using MidiApp.Infrastructure;
+using MidiApp.Wpf.Infrastructure;
 
-namespace MidiApp.ViewModels;
+namespace MidiApp.Wpf.ViewModels;
 
 public class AboutViewModel : ObservableObject
 {

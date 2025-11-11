@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using MidiApp.Extensions;
-using MidiApp.Infrastructure;
+using MidiApp.Wpf.Extensions;
+using MidiApp.Wpf.Infrastructure;
 
-namespace MidiApp.Models;
+namespace MidiApp.Wpf.Models;
 
 public class MainWindowModel
 {

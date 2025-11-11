@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using MidiApp.ViewModels;
+using MidiApp.Wpf.ViewModels;
 
-namespace MidiApp.Views;
+namespace MidiApp.Wpf.Views;
 
 /// <summary>
 /// Interaction logic for AboutView.xaml.

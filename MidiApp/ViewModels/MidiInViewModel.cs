@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using MidiApp.Commands;
-using MidiApp.Extensions;
-using MidiApp.Infrastructure;
-using MidiApp.Models;
+using MidiApp.Wpf.Commands;
+using MidiApp.Wpf.Extensions;
+using MidiApp.Wpf.Infrastructure;
+using MidiApp.Wpf.Models;
 
-namespace MidiApp.ViewModels;
+namespace MidiApp.Wpf.ViewModels;
 
 public class MidiInViewModel : ObservableObject
 {

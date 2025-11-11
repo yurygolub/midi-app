@@ -5,12 +5,12 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Input;
 using Microsoft.Win32;
-using MidiApp.Commands;
-using MidiApp.Extensions;
-using MidiApp.Infrastructure;
-using MidiApp.Models;
+using MidiApp.Wpf.Commands;
+using MidiApp.Wpf.Extensions;
+using MidiApp.Wpf.Infrastructure;
+using MidiApp.Wpf.Models;
 
-namespace MidiApp.ViewModels;
+namespace MidiApp.Wpf.ViewModels;
 
 public class MidiOutViewModel : ObservableObject
 {

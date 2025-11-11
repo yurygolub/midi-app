@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NAudio.Midi;
 
-namespace MidiApp.Models;
+namespace MidiApp.Wpf.Models;
 
 public class MidiInModel
 {

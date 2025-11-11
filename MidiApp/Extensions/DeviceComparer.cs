@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MidiApp.Models;
+using MidiApp.Wpf.Models;
 
-namespace MidiApp.Extensions;
+namespace MidiApp.Wpf.Extensions;
 
 internal class DeviceComparer : IEqualityComparer<Device>
 {

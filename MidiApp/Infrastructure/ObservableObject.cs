@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 #pragma warning disable CS0067 // The event is never used
 
-namespace MidiApp.Infrastructure;
+namespace MidiApp.Wpf.Infrastructure;
 
 public abstract class ObservableObject : INotifyPropertyChanged
 {

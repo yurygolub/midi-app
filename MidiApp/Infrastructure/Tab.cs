@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
-using MidiApp.Commands;
+using MidiApp.Wpf.Commands;
 
-namespace MidiApp.Infrastructure;
+namespace MidiApp.Wpf.Infrastructure;
 
 public abstract class Tab
 {

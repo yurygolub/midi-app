@@ -1,7 +1,7 @@
 ﻿using System;
-using MidiApp.Views;
+using MidiApp.Wpf.Views;
 
-namespace MidiApp.Infrastructure;
+namespace MidiApp.Wpf.Infrastructure;
 
 public class MidiInTab : Tab
 {

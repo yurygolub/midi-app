@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using MidiApp.Models;
+using MidiApp.Wpf.Models;
 
-namespace MidiApp.Converters;
+namespace MidiApp.Wpf.Converters;
 
 public class DeviceToNameConverter : IValueConverter
 {

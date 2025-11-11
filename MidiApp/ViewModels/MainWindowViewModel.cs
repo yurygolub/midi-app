@@ -3,12 +3,12 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
-using MidiApp.Commands;
-using MidiApp.Infrastructure;
-using MidiApp.Models;
-using MidiApp.Views;
+using MidiApp.Wpf.Commands;
+using MidiApp.Wpf.Infrastructure;
+using MidiApp.Wpf.Models;
+using MidiApp.Wpf.Views;
 
-namespace MidiApp.ViewModels;
+namespace MidiApp.Wpf.ViewModels;
 
 public class MainWindowViewModel : ObservableObject
 {

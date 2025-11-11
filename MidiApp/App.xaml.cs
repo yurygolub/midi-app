@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MidiApp.Extensions;
-using MidiApp.Views;
+using MidiApp.Wpf.Extensions;
+using MidiApp.Wpf.Views;
 using NLog.Extensions.Logging;
 
-namespace MidiApp;
+namespace MidiApp.Wpf;
 
 /// <summary>
 /// Interaction logic for App.xaml.

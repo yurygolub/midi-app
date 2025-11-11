@@ -2,13 +2,13 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MidiApp.Infrastructure;
-using MidiApp.Models;
-using MidiApp.ViewModels;
-using MidiApp.Views;
+using MidiApp.Wpf.Infrastructure;
+using MidiApp.Wpf.Models;
+using MidiApp.Wpf.ViewModels;
+using MidiApp.Wpf.Views;
 using NLog.Extensions.Logging;
 
-namespace MidiApp;
+namespace MidiApp.Wpf;
 
 public class Startup
 {

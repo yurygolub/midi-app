@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
-namespace MidiApp.Extensions;
+namespace MidiApp.Wpf.Extensions;
 
 [SupportedOSPlatform("windows")]
 internal static class ConsoleManager

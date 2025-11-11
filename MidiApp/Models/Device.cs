@@ -1,4 +1,4 @@
-﻿namespace MidiApp.Models;
+﻿namespace MidiApp.Wpf.Models;
 
 public class Device
 {

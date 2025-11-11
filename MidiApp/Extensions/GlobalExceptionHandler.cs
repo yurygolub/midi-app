@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.Logging;
 
-namespace MidiApp.Extensions;
+namespace MidiApp.Wpf.Extensions;
 
 internal class GlobalExceptionHandler
 {

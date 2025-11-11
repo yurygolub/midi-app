@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MidiApp.Commands;
+namespace MidiApp.Wpf.Commands;
 
 public class ActionCommand : ICommand
 {
