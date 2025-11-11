@@ -2,21 +2,20 @@
 using System.Windows.Input;
 using MidiApp.Commands;
 
-namespace MidiApp.Infrastructure
+namespace MidiApp.Infrastructure;
+
+public abstract class Tab
 {
-    public abstract class Tab
-    {
-        private ICommand closeCommand;
+    private ICommand closeCommand;
 
-        public event EventHandler CloseRequested;
+    public event EventHandler CloseRequested;
 
-        public string Header { get; set; }
+    public string Header { get; set; }
 
-        public object Content { get; set; }
+    public object Content { get; set; }
 
-        public ICommand CloseCommand =>
-            this.closeCommand ??= new ActionCommand(() => this.CloseRequested?.Invoke(this, EventArgs.Empty));
+    public ICommand CloseCommand =>
+        this.closeCommand ??= new ActionCommand(() => this.CloseRequested?.Invoke(this, EventArgs.Empty));
 
-        public bool CanBeClosed { get; set; } = true;
-    }
+    public bool CanBeClosed { get; set; } = true;
 }

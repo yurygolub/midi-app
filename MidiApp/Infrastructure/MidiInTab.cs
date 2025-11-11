@@ -1,15 +1,14 @@
 ﻿using System;
 using MidiApp.Views;
 
-namespace MidiApp.Infrastructure
+namespace MidiApp.Infrastructure;
+
+public class MidiInTab : Tab
 {
-    public class MidiInTab : Tab
+    public MidiInTab(MidiInView midiInView)
     {
-        public MidiInTab(MidiInView midiInView)
-        {
-            this.Header = "Midi in";
-            this.CanBeClosed = false;
-            this.Content = midiInView ?? throw new ArgumentNullException(nameof(midiInView));
-        }
+        this.Header = "Midi in";
+        this.CanBeClosed = false;
+        this.Content = midiInView ?? throw new ArgumentNullException(nameof(midiInView));
     }
 }
