@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -8,13 +7,12 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using MidiApp.Commands;
 using MidiApp.Extensions;
+using MidiApp.Infrastructure;
 using MidiApp.Models;
-
-#pragma warning disable CS0067
 
 namespace MidiApp.ViewModels
 {
-    public class MidiOutViewModel : INotifyPropertyChanged
+    public class MidiOutViewModel : ObservableObject
     {
         private readonly MidiOutModel model;
 
@@ -32,8 +30,6 @@ namespace MidiApp.ViewModels
 
             this.CheckDevices();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool StartButtonEnabled { get; set; } = true;
 

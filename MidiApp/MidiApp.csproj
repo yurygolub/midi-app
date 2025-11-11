@@ -2,28 +2,26 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net7.0-windows</TargetFramework>
+        <TargetFramework>net9.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
-        <CodeAnalysisRuleSet>..\code-analysis.ruleset</CodeAnalysisRuleSet>
         <Deterministic>false</Deterministic>
         <AssemblyVersion>0.1.*</AssemblyVersion>
         <NoWarn>7035</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="..\code-analysis.ruleset" Link="Properties\code-analisys.ruleset" />
         <AdditionalFiles Include="..\stylecop.json" Link="Properties\stylecop.json" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-        <PackageReference Include="NAudio.Midi" Version="2.1.0" />
-        <PackageReference Include="NLog.Extensions.Logging" Version="5.3.3" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.10" />
+        <PackageReference Include="NAudio.Midi" Version="2.2.1" />
+        <PackageReference Include="NLog.Extensions.Logging" Version="6.0.5" />
         <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" PrivateAssets="All" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
             <PrivateAssets>all</PrivateAssets>

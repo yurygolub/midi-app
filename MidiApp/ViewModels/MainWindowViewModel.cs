@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,11 +8,9 @@ using MidiApp.Infrastructure;
 using MidiApp.Models;
 using MidiApp.Views;
 
-#pragma warning disable CS0067
-
 namespace MidiApp.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : ObservableObject
     {
         private readonly MainWindowModel model;
         private readonly IServiceProvider serviceProvider;
@@ -28,8 +25,6 @@ namespace MidiApp.ViewModels
             this.model = model ?? throw new ArgumentNullException(nameof(model));
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public ReadOnlyObservableCollection<Tab> TabCollection => this.model.TabPublicCollection;
 

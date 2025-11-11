@@ -1,13 +1,11 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
-
-#pragma warning disable CS0067
+using MidiApp.Infrastructure;
 
 namespace MidiApp.ViewModels
 {
-    public class AboutViewModel : INotifyPropertyChanged
+    public class AboutViewModel : ObservableObject
     {
         private readonly ILogger<AboutViewModel> logger;
 
@@ -30,8 +28,6 @@ namespace MidiApp.ViewModels
                 this.logger.LogError(ex, "Unhandled exception");
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public string Version { get; }
 
