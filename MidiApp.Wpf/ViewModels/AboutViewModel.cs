@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MidiApp.Wpf.Infrastructure;
@@ -15,12 +16,17 @@ public class AboutViewModel : ObservableObject
 
         try
         {
-            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            Version version = assembly.GetName().Version;
             var buildDate = new DateTime(2000, 1, 1)
                 .AddDays(version.Build)
                 .AddSeconds(version.Revision * 2);
 
+            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+
             this.Version = version.ToString();
+            this.ProductVersion = fileVersionInfo.ProductVersion;
             this.BuildDate = buildDate.ToString();
         }
         catch (Exception ex)
@@ -30,6 +36,8 @@ public class AboutViewModel : ObservableObject
     }
 
     public string Version { get; }
+
+    public string ProductVersion { get; }
 
     public string BuildDate { get; }
 }

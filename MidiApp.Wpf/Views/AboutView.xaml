@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         Topmost="True"
         Title="About" Height="200" Width="300">
@@ -21,7 +21,7 @@
 
     <StackPanel VerticalAlignment="Center">
         <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Left">
             <TextBlock Padding="5" Margin="10">
                 Version:
             </TextBlock>
@@ -32,9 +32,22 @@
                      IsReadOnly="True"
                      Padding="5" Margin="10"/>
         </StackPanel>
-        
+
         <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Left">
+            <TextBlock Padding="5" Margin="10">
+                ProductVersion:
+            </TextBlock>
+
+            <TextBox Text="{Binding ProductVersion, Mode=OneWay}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     IsReadOnly="True"
+                     Padding="5" Margin="10"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left">
             <TextBlock Padding="5" Margin="10">
                 Build date:
             </TextBlock>
